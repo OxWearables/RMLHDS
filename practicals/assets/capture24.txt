@@ -1,0 +1,3 @@
+Pull from /cdtshared/HDS-M08/capture24/
+Avoid copying the entire folder as it is quite large (~100GB). Instead, use the absolute path in the notebooks/scripts, or you can create a soft link:
+ln -s /cdtshared/HDS-M08/capture24/ capture24/

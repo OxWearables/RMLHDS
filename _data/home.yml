@@ -1,0 +1,145 @@
+navbar_entries:
+  - title: about
+    url: about
+
+  - title: blog
+    url: blog
+
+  - title: RMLHDS
+    url: https://oxwearables.github.io/RMLHDS/
+
+day1_entries:
+  - title: Practical 1
+    url: wearable-sensors
+    desc: Setup of wearable sensors
+
+  - title: Practical 2
+    url: vm
+    desc: Virtual Environments
+
+  - title: Practical 3
+    url: aws
+    desc: AWS cloud computing
+
+day2_entries:
+  - title: Practical 1
+    url: annotation
+    desc: Camera annotation
+
+  - title: Practical 2
+    url: github
+    desc: Version control with git and GitHub
+
+  - title: Practical 3
+    url: acc
+    desc: Accelerometer processing
+
+day3_entries:
+  - title: Practical 1
+    url: capture24
+    desc: CAPTURE-24 ML
+
+  - title: Practical 2
+    url: pytorch
+    desc: PyTorch
+
+  - title: Practical 3
+    url: ssl
+    desc: Using SSL models
+
+day4_entries:
+  - title: Practical 1
+    url: sleep
+    desc: sleep
+
+  - title: Practical 2
+    url: pypi
+    desc: PyPI distribution
+
+  - title: Practical 3
+    url: steps
+    desc: steps
+
+day5_entries:
+  - title: Practical 1
+    url: bulk
+    desc: Bulk processing of wearable measurements in large scale biobanks
+
+project_entries:
+  - title: Practical 1
+    url: prac1-device-setup
+    desc: Data collection
+
+  - title: Practical 2
+    url: prac2-data-annotation
+    desc: Data annotation
+
+  - title: Practical 3
+    url: prac3-data-analytics
+    desc: Data processing
+
+  - title: Practical 4
+    url: prac4-activity-classification
+    desc: Model development
+
+  - title: Practical 5
+    url: prac5-6-association-analysis-in-uk-biobank
+    desc: Association analysis
+
+
+old_project_entries:
+  - title: Soopr
+    url: https://www.soopr.co
+    desc: Delight your readers - add beautiful share and like buttons easily to your websites 
+    highlight: NEW
+
+  - title: Cookie
+    url: https://github.com/abhinavs/cookie
+    desc: An open source landing website with supporting pages and integrated blog
+
+  - title: Moonwalk
+    url: https://github.com/abhinavs/moonwalk
+    desc: A fast and minimalist Jekyll blog theme with clean dark mode
+
+  - title: Humangous
+    url: https://www.humangous.co
+    desc: The better people know you, the better they collaborate
+
+footer_entries:
+  - title: Oxford wearables group
+    url: https://github.com/oxwearables
+
+
+misc_entries:
+  - title: this is an example vertical list
+    url: false
+
+  - title: you can show or hide using a boolean flag in _config.yml
+    url: false
+
+  - title: and you can add data in _data/home.yml
+    url: false
+
+  - title: Blog posts
+    post_list: true
+    url: false
+
+  - title: moonwalk on the Internet
+    url: false
+    entries:
+      - title: on Github
+        url: https://github.com/abhinavs/moonwalk
+
+      - title: originally built for abhinav's homepage
+        url: https://www.abhinav.co
+
+      - title: this list is scalable and can be nested
+        url: false
+        entries:
+          - title: this is nested inside a nested list
+            url: false
+
+          - title: it is easy to use, see _data/home.yml to see how to configure it.
+            url: false
+
+
