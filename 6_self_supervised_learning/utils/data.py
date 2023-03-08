@@ -125,7 +125,7 @@ def resize(x, length, axis=1):
     length_orig = x.shape[axis]
     t_orig = np.linspace(0, 1, length_orig, endpoint=True)
     t_new = np.linspace(0, 1, length, endpoint=True)
-    x = interp1d(t_orig, x, kind="linear", axis=axis, assume_sorted=True)(
+    x = interp1d(t_orig, x, kind="nearest", axis=axis, assume_sorted=True)(
         t_new
     )
     return x
