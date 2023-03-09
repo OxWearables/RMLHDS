@@ -1,6 +1,15 @@
 .vscode
 __pycache__
 .ipynb_checkpoints
+
+# Downloaded data
 capture24
 capture24.zip
 processed_data
+8_stepcount/OxWalk_Dec2022
+8_stepcount/OxWalk_Dec2022.zip
+
+# Data files
+*.pkl
+*.csv
+*.npy
