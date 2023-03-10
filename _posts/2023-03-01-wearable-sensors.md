@@ -97,13 +97,9 @@ conda install pandas Pillow tqdm
 At this stage, you should be all setup for the tutorial.
 
 ## Practical code
-We have also prepared code for this practical. This can be downloaded here:
+We have also prepared code for this practical. This can be found [here on GitHub](https://github.com/OxWearables/RMLHDS).
 
->TODO: include actual link in the write-up
-
-[link]()
-
-Download the zip file, extract it and take note of where you save the code.
+Either clone or download the repository to your computer and take note of where you save it to. You will later have to navigate to the Python scripts in it.
 
 ## Collect devices
 Collect your devices from your tutors, who will go through the camera and accelerometer set-up with you. You should have been given 1 wearable camera (Vicon Autographer), 1 wrist-worn accelerometer, and 1 micro-USB cable. 
