@@ -226,14 +226,15 @@ For the Windows users, you can download [OMGUI](https://github.com/digitalintera
 
 ### Continue here
 
-
 You can now add the wearable accelerometer to your growing personal wearable ecosystem. Please wear the accelerometer on the wrist of the hand that you usually use to write (i.e. your right wrist if you are right-handed). Generally, this will be most convenient for people since it is typical to wear a watch on the other wrist. However, if for some reason you cannot wear the accelerometer on the wrist of the hand that you use to write, then please wear it on the other wrist. The heart-beat symbol should be on the inside of your wrist (i.e. facing towards you).
 ![arrow_alignment](https://user-images.githubusercontent.com/45289908/142623930-4c2ef153-acb5-442f-a65b-84f8eb051fd8.png)
 
 
 At this point, you should have an accelerometer mounted on your wrist, and a camera worn on a lanyard around your neck. If you feel sufficiently surveilled, call over one of your tutors to check you have done everything correctly, and then try to pack in as many fun activities for the rest of the practical. In the next practical session, we will annotate these activities. 
 
-It is also worth taking this time to reflect on the various ethical implications raised by using wearable devices in research. Are wearables actually a more unbiased means of recording lifestyle behaviours? Are there, for instance, certain behaviours which people would normally do, but would be less likely to when wearing wearable devices? 
+> At this stage, please return the micro-USB cable that you used to set up your wearable devices to your tutor.
+
+It is worth taking this time to reflect on the various ethical implications raised by using wearable devices in research. Are wearables actually a more unbiased means of recording lifestyle behaviours? Are there, for instance, certain behaviours which people would normally do, but would be less likely to when wearing wearable devices? 
 
 ---
 
