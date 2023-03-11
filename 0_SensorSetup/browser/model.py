@@ -29,7 +29,7 @@ class Model:
         save_path: str,
         view: View,
         n_processes: int = 4,
-        rotate_image: int = -90,
+        rotate_image: int = 0,
     ):
         # Class attributes
         self.n_display_images = n_display_images
