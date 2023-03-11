@@ -107,6 +107,4 @@ At this stage, you have annotated your own camera data.
 
 > Reflect on how we can improve the camera annotation process. How can machine learning assist in this process and enable faster annotation. Are there any risks with incorporating machine learning? How do we deal with bias introduced by the annotator, including biases that arise from practical issues such as fatigue from annotating many images.
 
-If you have made it this far, and feel like you have had enough discussion, you can try and match up your camera informed annotations with the data from your wrist-worn accelerometer.
-
-> Once you have 
+If you have made it this far, and feel like you have had enough discussion, you can try and match up your camera informed annotations with the data from your wrist-worn accelerometer. In order to process the accelerometer data, look into the package [actipy](https://actipy.readthedocs.io/en/latest/).
