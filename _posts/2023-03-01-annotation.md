@@ -70,7 +70,6 @@ However, we are going to let you come up with your own annotations. In order to 
 # 2. Annotation 
 Now that we have downloaded and processed our camera data, and we have an annotation schema, we can start applying the labels from the schema to our data. 
 
-## 2.1. 
 Navigate to the `browser` folder in the code you previously downloaded. We will assume that the `sensorsetup` conda environment is still active.
 
 Now, if everything is correctly set up, you should be able to run:
@@ -98,7 +97,7 @@ On the left of the screen is the list of annotations you can apply to each image
 Once you have reached the end of the images, or have run out of steam, notice that the applicaiton has automatically save your annotations to the specified file `your_annotations.csv`. You can open this file in any tabular data editor. It has the format:
 
 |time           | id    | path  | comments  | label 0       | label 1       | ...   | label N       |
-| ------------  | ----- | ----- | --------- | ------------- | ------------- | ...   | ------------- |
+| ------------  | ----- | ----- | --------- | ------------- | ------------- | ----  | ------------- |
 |`np.datetime64`| `int` | `str` | `str`     | `float [0,1]` | ditto label 0 | ...   | ditto label 0 |
 
 where label 0 to N are the annotations in your annotation schema, and the value under label i for a particular row is the confidence that a particular image (the one that can be found at the image path) demonstrates label i. 
