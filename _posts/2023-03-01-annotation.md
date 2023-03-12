@@ -63,7 +63,7 @@ You can then delete the `.CWA` file on the device, and eject the device.
 # 1. Creating a schema
 In order to annotate each image taken by the camera, we need a set of annotations to choose from. This set of possible annotations is called the annotation schema. For detailed annotations of physical activity, we tend to use the [compenidum of physical activity](https://sites.google.com/site/compendiumofphysicalactivities/Activity-Categories?authuser=0) to inform our annotation schema. 
 
-However, we are going to let you come up with your own annotations. In order to do this, you are going to edit the `your_schema.csv` file under `browser/data`. You can edit this file within any tabular data editor, such as Microsoft Excel, or even just TextEdit. Each annotation needs to be on a new line. You will notice that we have already included the annotations: bicycling, mixed, sleep, sit-stand, vehicle, and walking. We suggest you keep these annotations and add additional ones, perhaps clarifying certain activities, or describing activities not included in the provided annotations. 
+However, we are going to let you come up with your own annotations. In order to do this, you are going to edit the `my_schema.csv` file under `browser/data`. You can edit this file within any tabular data editor, such as Microsoft Excel, or even just TextEdit. Each annotation needs to be on a new line. You will notice that we have already included the annotations: bicycling, mixed, sleep, sit-stand, vehicle, and walking. We suggest you keep these annotations and add additional ones, perhaps clarifying certain activities, or describing activities not included in the provided annotations. 
 
 > Discuss what makes a good annotation schema. Should each image be uniquely described by a single label, or should multiple labels apply to each image?
 
@@ -85,7 +85,7 @@ Set the path to the root of the image folders (`browser/data/my_camera`, NOT `br
 
 Set how many images you want to display at a time (we recommend 3), and which image in that sequence you want to annotate (we recommend the middle image, which will have index 1, because of zero-indexing).
 
-Set the path to your annotation schema (`browser/data/your_schema.csv`). 
+Set the path to your annotation schema (`browser/data/my_schema.csv`). 
 
 Lastly, set the path to where you want to save your annotations, for instance (`browser/data/your_annotations.csv`). 
 
