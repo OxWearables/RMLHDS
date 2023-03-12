@@ -11,7 +11,7 @@ In this practical, you will learn how to process and annotate the camera data us
 We have elected to use a simple Python-based GUI for several reasons. Firstly, we wanted to to use an offline tool so that your data can stay on your computer. Secondly, we wanted to minimise the amount of additional software dependencies required to annotate your data. Finally, although there are many more sophisticated image annotations tools out there, each of them require some level of tweaking to do what we want them to do. Instead of spending time trying to understand and adapt an existing tool to our needs, we decided to quickly prototype our own. If any of you wish to try improve the funcitonality of the GUI, we have provided all the source code for you to edit as you wish. 
 
 # 0. Downloading your data
-# 0.1 Downloading camera data
+## 0.1 Downloading camera data
 Collect a micro-USB cable from your tutors. 
 Take off the camera and plug it into your computer using the provided cable and make a note of the camera directory (e.g., `D:/` for Windows, and `/Volumes/` for Mac)
 
@@ -53,7 +53,7 @@ image_root_dir/ P001/   B<img_number><img_timestamp>.JPG
 ```
 create a new folder under `browser/data` called `my_camera`and within `my_camera`, a folder `P001` where you move all of your `.JPG` files to. 
 
-# 0.1 Downloading accelerometer data
+## 0.2 Downloading accelerometer data
 To download the accelerometer data, plug in the accelerometer into your computer using the provided cable. You should notice data from the accelerometer popping up under `D:/` for Windows or under `/Volumes/` for Mac. Copy the `.CWA` file from the accelerometer to a folder such as `browser/data/my_accelerometer`.
 You can then delete the `.CWA` file on the device, and eject the device.
 
@@ -70,7 +70,6 @@ However, we are going to let you come up with your own annotations. In order to 
 # 2. Annotation 
 Now that we have downloaded and processed our camera data, and we have an annotation schema, we can start applying the labels from the schema to our data. 
 
-## 2.1. 
 Navigate to the `browser` folder in the code you previously downloaded. We will assume that the `sensorsetup` conda environment is still active.
 
 Now, if everything is correctly set up, you should be able to run:
@@ -98,7 +97,7 @@ On the left of the screen is the list of annotations you can apply to each image
 Once you have reached the end of the images, or have run out of steam, notice that the applicaiton has automatically save your annotations to the specified file `your_annotations.csv`. You can open this file in any tabular data editor. It has the format:
 
 |time           | id    | path  | comments  | label 0       | label 1       | ...   | label N       |
-| ------------  | ----- | ----- | --------- | ------------- | ------------- | ...   | ------------- |
+| ------------  | ----- | ----- | --------- | ------------- | ------------- | ----  | ------------- |
 |`np.datetime64`| `int` | `str` | `str`     | `float [0,1]` | ditto label 0 | ...   | ditto label 0 |
 
 where label 0 to N are the annotations in your annotation schema, and the value under label i for a particular row is the confidence that a particular image (the one that can be found at the image path) demonstrates label i. 
