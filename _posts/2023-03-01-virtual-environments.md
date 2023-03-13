@@ -186,6 +186,17 @@ conda env remove -n myenv
 
 In `venv`, simply delete the folder that you created with `venv`.
 
+## Environment managers and Package managers
+`venv` is an environment manager
+
+`pip` is a package manager
+
+`conda` is both a package & environment manager, plus other data sciency tools
+
+You _could_ use both `pip` and `conda` for package management, but we recommend that you don't mix them and stick to one.
+
+*Best practice*: Using `conda` to manage the *environment*, and `pip` to manage the *packages*.
+
 ## Use `venv` or `conda`?
 The most obvious difference is the place where environments are stored. `venv` keeps it near your project files whereas `conda` stores it somewhere in its folder. On the other hand, this means that Conda environments are more easily accesible globally: If we want to activate some environment, we don't need to remember where it was installed (see Step 4). 
 
