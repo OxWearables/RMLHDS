@@ -10,12 +10,17 @@ In this practical, you will learn how to process and annotate the camera data us
 
 We have elected to use a simple Python-based GUI for several reasons. Firstly, we wanted to to use an offline tool so that your data can stay on your computer. Secondly, we wanted to minimise the amount of additional software dependencies required to annotate your data. Finally, although there are many more sophisticated image annotations tools out there, each of them require some level of tweaking to do what we want them to do. Instead of spending time trying to understand and adapt an existing tool to our needs, we decided to quickly prototype our own. If any of you wish to try improve the funcitonality of the GUI, we have provided all the source code for you to edit as you wish. 
 
+## Practical code
+We have also prepared code for this practical. This can be found [here on GitHub](https://github.com/OxWearables/RMLHDS).
+
+Either clone or download the repository to your computer and take note of where you save it to. You will later have to navigate to the Python scripts in it. The code may have changed since yesterday's practical - it is worth re-downloading the code to up to date with the most recent version.
+
 # 0. Downloading your data
 ## 0.1 Downloading camera data
 Collect a micro-USB cable from your tutors. 
 Take off the camera and plug it into your computer using the provided cable and make a note of the camera directory (e.g., `D:/` for Windows, and `/Volumes/` for Mac)
 
-From the Anaconda prompt (Windows), or terminal (Mac), navigate to the `scripts` directory that previously downloaded. We will use the `autographer.py` script to download your data. Start the `sensorsetup` virtual environment that you created. 
+From the Anaconda prompt (Windows), or terminal (Mac), navigate to the `scripts` directory that we have downloaded. It should under `RMLHDS/0_SensorSetup/scripts/`. We will use the `autographer.py` script to download your data. Start the `sensorsetup` virtual environment that you created. 
 
 ### Mac
 Run the following to download your data:
