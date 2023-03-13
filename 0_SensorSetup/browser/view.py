@@ -32,11 +32,14 @@ class View:
         self.schema_frame.grid(column=0, row=0, sticky="n")
 
         # -> model will update schema frame to show available labels
+        # =================== Info frame =================== (top right)
+        self.information_frame = ttk.Frame(content, padding=SUBFRAME_PAD)
+        self.information_frame.grid(column=1, row=0, sticky="e")
 
-        # =================== Image Frame =================== (top right)
+        # =================== Image Frame =================== (top right, just below info frame)
         # create a frame for images on the right
         self.image_frame = ttk.Frame(content, padding=FRAME_PAD)
-        self.image_frame.grid(column=1, row=0)
+        self.image_frame.grid(column=1, row=1)
 
         # add placeholder text saying Images loading... which will be replaced by images
         self.image_placeholder_text = ttk.Label(
@@ -49,7 +52,7 @@ class View:
         # =================== Input Frame =================== (bottom right)
         # create a frame for the annotation input at the bottom
         self.input_frame = ttk.Frame(content, padding=FRAME_PAD)
-        self.input_frame.grid(column=1, row=1)
+        self.input_frame.grid(column=1, row=2)
 
         # ===== Image navigation
         # add frame at top to navigate between images

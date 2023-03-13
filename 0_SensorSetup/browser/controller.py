@@ -208,12 +208,13 @@ class Controller:
         # Add text box to the right to enter the comment
         self.comment_text = StringVar(value="")
         self.comment_entry = ttk.Entry(
-            self.comment_frame, textvariable=self.comment_text, width = 50,
+            self.comment_frame,
+            textvariable=self.comment_text,
+            width=50,
         )
         self.comment_entry.grid(column=1, row=0)
         # whenever the user leaves the comment box, update the model
         self.comment_entry.bind("<FocusOut>", self.update_comment)
-
 
     def load_comment(self):
         """

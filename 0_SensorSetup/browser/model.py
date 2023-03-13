@@ -1,7 +1,5 @@
 from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-
+from tkinter import messagebox, ttk
 
 from PIL import Image, ImageTk
 
@@ -39,10 +37,20 @@ class Model:
         self.save_path = save_path
         self.view = view
 
+        # image related
+        self.loading_text = None
+        self.images_on_screen = None
+
         # =============== Initialise pandas dataframe: "annotation_df"
         # load images
         img_path_format = img_root_dir + "/P*/*.JPG"
         img_df = process_imgs(img_path_format, n_processes=n_processes)
+
+        # check there are images to display
+        if len(img_df) == 0:
+            messagebox.showinfo(message="No images to display.")
+            return None
+
         # load schema
         self.labels = parse_schema(schema_path)
         # Initialise annotation table
@@ -53,11 +61,14 @@ class Model:
             drop=True
         )  # reset index to be 0, 1, 2, ...
 
-        # find first valid row
-        self.row = image_index - 1
-        if not self.next_row():
-            messagebox.showinfo(message="No images to display.")
-            return None
+        # =============== Initialise row
+        self.row = 0  # current row to annotate
+        self.n_participant_photos = (
+            self.count_participant_photos()
+        )  # count number of photos for current participant
+        self.participant_start_row = (
+            self.row
+        )  # row where the current participant starts
 
         # =============== Initialise view
         self.init_schema_frame()  # populates the schema frame with labels
@@ -82,40 +93,52 @@ class Model:
     def next_row(self):
         """
         Move to next row to annotate.
-        Checks that we do not go beyond end of the dataframe,
-        and that all images belong to the same participant.
+        Checks that we do not go beyond end of the dataframe
         """
         # Check that we are not at the end of the dataframe
-        if self.row == len(self.annotation_df) - self.images_to_right - 1:
+        if self.row == len(self.annotation_df) - 1:
             return False
 
-        for next_row in range(
-            self.row + 1, len(self.annotation_df) - self.images_to_right
+        self.row += 1
+        # if we switch to a new participant, reset the participant start row, and recalculate the number of photos for the participant
+        if (
+            self.annotation_df.loc[self.row, "id"]
+            != self.annotation_df.loc[self.row - 1, "id"]
         ):
-            if self._check_row_ids(next_row):
-                self.row = next_row
-                # update View to display next set of images
-                return True
+            self.participant_start_row = self.row
+            self.n_participant_photos = self.count_participant_photos()
 
-        return False
+        return True
 
-    def prev_row(self):
+    def prev_row(self) -> bool:
         """
         Move to previous row to annotate.
-        Checks that we do not go beyond beginning of the dataframe,
-        and that all images belong to the same participant.
+        Checks that we do not go beyond beginning of the dataframe.
         """
         # Check that we are not at the beginning of the dataframe
-        if self.row == self.image_index:
+        if self.row == 0:
             return False
 
-        for prev_row in range(self.row - 1, self.image_index - 1, -1):
-            if self._check_row_ids(prev_row):
-                self.row = prev_row
-                # update View to display next set of images
-                return True
+        self.row -= 1
+        # if we switch to a new participant, reset the participant start row, and recalculate the number of photos for the participant
+        if (
+            self.annotation_df.loc[self.row, "id"]
+            != self.annotation_df.loc[self.row + 1, "id"]
+        ):
+            self.n_participant_photos = self.count_participant_photos()
+            self.participant_start_row = self.row - self.n_participant_photos + 1
 
-        return False
+        return True
+
+    def count_participant_photos(self) -> int:
+        """
+        Counts the number of photos for the current participant.
+        """
+        return len(
+            self.annotation_df[
+                self.annotation_df.id == self.annotation_df.loc[self.row, "id"]
+            ]
+        )
 
     def _check_row_ids(self, row):
         """
@@ -135,32 +158,53 @@ class Model:
 
     def display_images(self):
         """
-        Displays the images in the image frame of the view.
-        Images start at the current row and includes self.image_index images to the left and self.images_to_right images to the right.
+        Displays the images in the image frame of the view, the particpant ID, and how many images have been annotated so far.
+        Makes a call to the adapt_image_display to get:
+        - How many images to display: n_display_images,
+        - Which image to draw a bounding box around: image_index,
         Returns true if the images were displayed and false if there are no more images to display.
         """
-        if self.row + self.images_to_right >= len(self.annotation_df):
+        n_display_images, image_index, images_to_right = self.adapt_image_display()
+
+        if self.row + images_to_right >= len(self.annotation_df):
             return False
+        if self.row - image_index < 0:
+            return False
+
+        # add text to information_frame on which image we are currently on
+        for widget in self.view.information_frame.winfo_children():
+            widget.destroy()
+
+        ttk.Label(
+            self.view.information_frame,
+            text=f"Image {self.row + 1} of {len(self.annotation_df)}",
+        ).grid(column=0, row=0)
 
         # clear the image frame
         for widget in self.view.image_frame.winfo_children():
             widget.destroy()
 
-        # add a loading label while images are being loaded
+        # add particant ID to the top of the image frame
+        ttk.Label(
+            self.view.image_frame,
+            text=f"Participant: {self.annotation_df.loc[self.row, 'id']}",
+        ).grid(column=0, row=0, columnspan=self.n_display_images)
+
+        # add a loading label while images are being loaded
         self.loading_text = ttk.Label(self.view.image_frame, text="Loading...")
-        self.loading_text.grid(column=0, row=0)
+        self.loading_text.grid(column=0, row=1, columnspan=self.n_display_images)
 
         self.images_on_screen = (
             []
         )  # need pointers to current images on display, otherwise they get garbage collected
         # add self.n_display_images frames to the view.image_frame
-        for i in range(self.n_display_images):
-            img_index = self.row - self.image_index + i
+        for i in range(n_display_images):
+            img_index = self.row - image_index + i
             # add frame
             image_box = ttk.Frame(self.view.image_frame, padding=ELEMENT_PAD)
-            if i == self.image_index:
-                image_box.config(borderwidth=BORDER_WIDTH, relief="solid")
-            image_box.grid(column=i, row=0)
+            if i == image_index:
+                image_box.config(borderwidth=IMG_BORDER_WIDTH, relief="solid")
+            image_box.grid(column=i, row=1)
 
             # read image and timestamp from dataframe
             image = Image.open(self.annotation_df.loc[img_index, "path"])
@@ -170,8 +214,8 @@ class Model:
             self.images_on_screen.append(img)
 
             timestamp = self.annotation_df.loc[img_index, "time"]
-            # format timestamp to display day and time as day, %d day %Hh%M:%S
-            timestamp = timestamp.strftime("Day %d, %Hh%M:%S")
+            # format timestamp to display date and time as yyyy/mm/dd HHhMM:SS
+            timestamp = timestamp.strftime("%Y/%m/%d %Hh%M:%S")
 
             # add label with timestamp above image, centered
             ttk.Label(image_box, text=timestamp).grid(column=0, row=0)
@@ -182,6 +226,70 @@ class Model:
         self.loading_text.destroy()
 
         return True
+
+    def adapt_image_display(self):
+        """
+        Firstly, check if self.n_display_images can be displayed - sometime participants will have less images than self.n_display_images
+        Sometimes, self.row is less than self.image_index.
+        This happens:
+        - if we are near the beginning of the dataframe
+        - if we are near the end of the dataframe
+        - if we are nearing the end of a participant's images
+        In this case, we want to move the image index along and keep the same images on screen.
+        So, as we increment the row, we temporarily increment the image index, the images to left and decrease the images to right.
+        We do the reverse when decrementing the row.
+
+        Returns:
+        - n_display_images: the number of images to display
+        - image_index: the index of the image within the n_display_images images to draw a bounding box around
+        - images_to_right: the number of images to the right of the image_index image (could just be calculated from n_display_images and image_index)
+        """
+        n_display_images = self.n_display_images
+        image_index = self.image_index
+        images_to_right = self.images_to_right
+
+        # check if the current participant has enough images to display self.n_display_images images
+        # in this case, we display all the images for the participant and just move the image index along
+        if self.n_participant_photos <= self.n_display_images:
+            n_display_images = self.n_participant_photos
+            image_index = self.row - self.participant_start_row
+            images_to_right = self.n_participant_photos - image_index - 1
+            return n_display_images, image_index, images_to_right
+
+        # now we are sure that the participant has enough images to display self.n_display_images images
+        # we just need to check whether we are near the beginning, the end, or near the beginning or end of a participant's images
+
+        # case: near the beginning of the dataframe
+        if self.row < self.image_index:
+            image_index = self.row
+            images_to_right = self.n_display_images - image_index - 1
+            return n_display_images, image_index, images_to_right
+
+        # case: near the end of the dataframe
+        if self.row + self.images_to_right >= len(self.annotation_df):
+            images_to_right = len(self.annotation_df) - self.row - 1
+            image_index = self.n_display_images - images_to_right - 1
+            return n_display_images, image_index, images_to_right
+
+        # case: nearing the beginning of a participant's images
+        if self.row - self.participant_start_row < self.image_index:
+            image_index = self.row - self.participant_start_row
+            images_to_right = self.n_display_images - image_index - 1
+            return n_display_images, image_index, images_to_right
+
+        # case: nearing the end of a participant's images
+        if (
+            self.row + self.images_to_right - self.participant_start_row
+            >= self.n_participant_photos
+        ):
+            images_to_right = (
+                self.n_participant_photos - self.row - self.participant_start_row - 1
+            )
+            image_index = self.n_display_images - images_to_right - 1
+            return n_display_images, image_index, images_to_right
+
+        # finally, case where we are neither at the beginning or end of the dataframe, nor nearing the beginning or end of a participant's images
+        return n_display_images, image_index, images_to_right
 
     def resize_image(self, image):
         """
