@@ -10,6 +10,32 @@ In this practical, you will learn how to process and annotate the camera data us
 
 We have elected to use a simple Python-based GUI for several reasons. Firstly, we wanted to to use an offline tool so that your data can stay on your computer. Secondly, we wanted to minimise the amount of additional software dependencies required to annotate your data. Finally, although there are many more sophisticated image annotations tools out there, each of them require some level of tweaking to do what we want them to do. Instead of spending time trying to understand and adapt an existing tool to our needs, we decided to quickly prototype our own. If any of you wish to try improve the funcitonality of the GUI, we have provided all the source code for you to edit as you wish. 
 
+## Requirements
+Before starting this tutorial, we expect you to have the following:
+- A recent version of Python installed on your machine, for instance through installing miniconda.
+- The following Python packages:
+    - [pandas](https://pandas.pydata.org) (used for working with tabular data)
+    - [Pillow](https://pillow.readthedocs.io/en/stable/) (used for image processing) 
+    - [Tkinter](https://docs.python.org/3/library/tkinter.html) (used for the annotation interface). By default, this should be installed with Python on Windows. On mac, you may have to install this separately. You can check this is installed by running `python -m tkinter`.
+
+We went through installing these in the previous practical, but in case you were NOT able to install all of these, here are instructions:
+
+### Installation reminder:
+Activate the virtual environment you set up yesterday and install `pandas`, and `Pillow`.
+```shell
+conda activate sensorsetup
+conda install pandas pillow
+```
+
+Check that Tkinter, which should have automatically been installed alongside Python, works on your machine. You can verify this by typing:
+```shell
+python -m tkinter
+```
+If Tkinter is correctly set-up, a pop-up window should appear saying, "This is Tcl/Tk version 8.6. This should be a cedilla: ç". The exact version number does not matter too much, provided it is relatively recent. If this is NOT working, see [TkDocs](https://tkdocs.com/tutorial/install.html). One potential fix is to install it using conda by running:
+```shell
+conda install -c conda-forge tk
+```
+
 ## Practical code
 We have also prepared code for this practical. This can be found [here on GitHub](https://github.com/OxWearables/RMLHDS).
 

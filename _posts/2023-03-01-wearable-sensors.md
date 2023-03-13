@@ -39,7 +39,7 @@ conda create --name sensorsetup
 3. Activate the virtual environemnt and install `pandas`, `Pillow`  and `tqdm`.
 ```shell
 conda activate sensorsetup
-conda install pandas Pillow tqdm
+conda install pandas pillow tqdm
 ```
 
 4. Lastly, check that Tkinter, which should have automatically been installed alongside Python, works on your machine. You can verify this by typing:
@@ -47,6 +47,11 @@ conda install pandas Pillow tqdm
 python -m tkinter
 ```
 If Tkinter is correctly set-up, a pop-up window should appear saying, "This is Tcl/Tk version 8.6. This should be a cedilla: ç". The exact version number does not matter too much, provided it is relatively recent. If this is not working, see [TkDocs](https://tkdocs.com/tutorial/install.html).
+
+One potential fix is to intall it using conda by running:
+```shell
+conda install -c conda-forge tk
+```
 
 At this stage, you should be all setup for the tutorial.
 
@@ -91,7 +96,7 @@ conda create --name sensorsetup
 5. Activate the virtual environemnt and install `pandas`, `Pillow`  and `tqdm`.
 ```shell
 conda activate sensorsetup
-conda install pandas Pillow tqdm
+conda install pandas pillow tqdm
 ```
 
 At this stage, you should be all setup for the tutorial.
