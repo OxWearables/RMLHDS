@@ -27,7 +27,7 @@ day2_entries:
     desc: Camera annotation
 
   - title: Practical 2
-    url: github
+    url: git-and-github
     desc: Version control with git and GitHub
 
   - title: Practical 3
