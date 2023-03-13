@@ -14,9 +14,8 @@ def check_img_root_dir(img_root_dir):
     img_fps = glob(img_path_format)
     if len(img_fps) == 0:
         return False
-    
-    return True
 
+    return True
 
 
 def process_imgs(img_path_format: str, n_processes: int = 3) -> pd.DataFrame:
