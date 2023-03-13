@@ -14,7 +14,7 @@ day1_entries:
     desc: Setup of wearable sensors
 
   - title: Practical 2
-    url: vm
+    url: virtual-environments
     desc: Virtual Environments
 
   - title: Practical 3
